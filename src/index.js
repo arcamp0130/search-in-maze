@@ -1,4 +1,5 @@
 import { fileURLToPath } from "url";
+import router from "./routes/index.routes.js";
 import express from "express";
 import path from "path";
 
@@ -12,12 +13,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const staticPath = process.env.NODE_ENV === "production"
     ? path.join(__dirname, "../dist/public")    // Built
     : path.join(__dirname, "../public");        // Dev
-
-// Creating router
-const router = express.Router();
-router.get("/", (_, res) => {
-    res.sendFile("index.html", { root: "public" });
-});
 
 // Implementing server configs
 app.use(express.static(staticPath));
