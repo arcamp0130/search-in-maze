@@ -1,0 +1,26 @@
+{
+  "name": "search-in-maze",
+  "version": "1.0.0",
+  "description": "Vite project using DFS and BFS algorithims to search a path from a chosen source to a certain target.",
+  "keywords": [
+    "DFS",
+    "BFS",
+    "Algorithim",
+    "Search",
+    "Graphs",
+    "Tree",
+    "Maze"
+  ],
+  "license": "ISC",
+  "author": "arcamp0130",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=./.env ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0"
+  }
+}
