@@ -5,14 +5,38 @@
   --border-color: hsl(0, 0%, 40%);
   --cell-free-color: hsl(240, 10%, 50%);
   --cell-wall-color: hsl(0, 30%, 15%);
-  --cell-source-color: hsl(180, 50%, 50%);
+  --cell-start-color: hsl(180, 50%, 50%);
   --cell-target-color: hsl(40, 50%, 50%);
   --cell-trackback-color: hsl(120, 50%, 50%);
   --cell-searching-color: hsl(270, 50%, 50%);
-  --cell-hover-border: hsl(0, 0%, 10%);
+  --cell-hover-border: hsl(300, 70%, 40%);
   --alert-background-color: hsla(240, 100%, 10%, 20%);
   --radio-border: hsl(0, 0%, 40%);
-  --input-cell-selected: hsl(192, 59%, 60%);
+  --input-cell-selected: hsl(0, 0%, 5%);
+}
+
+.cell.free {
+  background-color: var(--cell-free-color);
+}
+
+.cell.wall {
+  background-color: var(--cell-wall-color);
+}
+
+.cell.start {
+  background-color: var(--cell-start-color);
+}
+
+.cell.target {
+  background-color: var(--cell-target-color);
+}
+
+.cell.trackback {
+  background-color: var(--cell-trackback-color);
+}
+
+.cell.searching {
+  background-color: var(--cell-searching-color);
 }
 
 * {
