@@ -27,12 +27,24 @@
                     <div class="container">
                         <p>Select to change</p>
                         <div class="cells controller">
+                            <input type="radio" class="cell free" name="cell-change" id="free-cell-inp" checked></button>
+                            <input type="radio" class="cell wall" name="cell-change" id="add-wall-inp"></button>
+                            <input type="radio" class="cell start" name="cell-change" id="start-point-inp"></button>
+                            <input type="radio" class="cell target" name="cell-change" id="target-inp"></button>
                         </div>
                     </div>
 
                     <div class="container">
                         <p>Select an algorithm</p>
                         <div class="algorithms controller">
+                            <div class="control">
+                                <input type="radio" name="algorithm" id="dfs" value="dfs" checked>
+                                <label for="dfs">DFS</label>
+                            </div>
+                            <div class="control">
+                                <input type="radio" name="algorithm" id="bfs" value="bfs">
+                                <label for="bfs">BFS</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +82,7 @@
         </div>
 
         <div class="alert container">
-            <p id="message">Message or alert will apear here</p>
+            <p id="message">Message or alert will be here</p>
         </div>
     </main>
 </body>

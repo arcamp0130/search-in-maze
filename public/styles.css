@@ -1,7 +1,7 @@
 :root {
   --primary-color: hsl(240, 15%, 20%);
   --font-color: hsl(0, 0%, 80%);
-  --banner-color: hsl(240, 15%, 25%);
+  --secondary-color: hsl(240, 15%, 25%);
   --border-color: hsl(0, 0%, 40%);
   --cell-free-color: hsl(240, 10%, 50%);
   --cell-wall-color: hsl(0, 30%, 15%);
@@ -11,6 +11,8 @@
   --cell-searching-color: hsl(270, 50%, 50%);
   --cell-hover-border: hsl(0, 0%, 10%);
   --alert-background-color: hsla(240, 100%, 10%, 20%);
+  --radio-border: hsl(0, 0%, 40%);
+  --input-cell-selected: hsl(192, 59%, 60%);
 }
 
 * {
@@ -30,7 +32,7 @@ body {
 }
 
 header {
-  background-color: var(--banner-color);
+  background-color: var(--secondary-color);
   margin: 0 0 0.5rem 0;
 }
 
@@ -98,6 +100,23 @@ hr {
 .cell {
   aspect-ratio: 1;
   background-color: var(--cell-free-color);
+  border-radius: 0.25rem;
+}
+
+input.cell {
+  border: 0;
+  min-height: 2rem;
+  min-width: 2rem;
+  border: 0;
+}
+
+input[type="radio"][name="cell-change"] {
+  appearance: none;
+  margin: 0;
+}
+
+input[type="radio"][name="cell-change"]:checked {
+  border: 0.2rem solid var(--input-cell-selected);
 }
 
 .controls {
@@ -105,7 +124,8 @@ hr {
   flex-direction: column;
 }
 
-.controls .cell:hover, #maze .cell:hover  {
+.controls .cell:hover,
+#maze .cell:hover {
   cursor: pointer;
   outline: 0.2rem solid var(--cell-hover-border);
   outline-offset: -0.2rem;
@@ -141,7 +161,7 @@ li p {
 }
 
 li .cell {
-    min-width: 2rem;
+  min-width: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -160,7 +180,8 @@ li .cell {
     justify-content: center;
   }
 
-  .terms .section, .terms.container {
+  .terms .section,
+  .terms.container {
     max-width: 425px;
     margin: 0 auto;
   }
@@ -168,6 +189,6 @@ li .cell {
   .symbols ul {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem
+    gap: 0.5rem;
   }
 }
