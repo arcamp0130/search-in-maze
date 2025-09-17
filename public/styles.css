@@ -1,28 +1,123 @@
+:root {
+  --primary-color: hsl(240, 15%, 20%);
+  --font-color: hsl(0, 0%, 80%);
+  --banner-color: hsl(240, 15%, 25%);
+  --border-color: hsl(0, 0%, 40%);
+  --cell-free-color: hsl(240, 10%, 50%);
+  --cell-wall-color: hsl(0, 30%, 15%);
+  --cell-source-color: hsl(180, 50%, 50%);
+  --cell-target-color: hsl(40, 50%, 50%);
+  --cell-trackback-color: hsl(120, 50%, 50%);
+  --cell-searching-color: hsl(270, 50%, 50%);
+  --cell-hover-border: hsl(0, 0%, 10%);
+  --alert-background-color: hsla(240, 100%, 10%, 20%);
+}
+
 * {
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: hsl(240, 14%, 20%);
-    color: hsl(0, 0%, 80%);
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  height: 100%;
 }
 
 header {
-    background-color: hsl(240, 15%, 25%);
-    margin: 0 0 0.5rem 0;
+  background-color: var(--banner-color);
+  margin: 0 0 0.5rem 0;
 }
 
-header > h1{
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 1rem 0;
-    margin: 0;
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  margin: 2rem auto;
+  max-width: 1024px;
+}
+
+hr {
+  border: 1px solid var(--border-color);
+  margin: 2rem 1rem;
+}
+
+.game.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+
+.alert.container {
+  width: 100%;
+  max-width: 768px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background-color: var(--alert-background-color);
+  border-radius: 1rem;
+}
+
+#message {
+  text-align: center;
+  margin: 0;
+}
+
+.maze.container {
+  display: block;
+  width: 100%;
+  max-width: 30rem;;
+}
+
+#maze {
+  width: 100%;
+  height: 100%;
+}
+
+.terms.container {
+  width: 100%;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: var(--cell-free-color);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.cell:hover  {
+  cursor: pointer;
+  outline: 0.2rem solid var(--cell-hover-border);
+  outline-offset: -0.2rem;
+}
+
+.cells.controller {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  max-width: 15rem;
+}
+
+.symbols li {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  align-content: center;
+  height: 2rem;
+  gap: 0.5rem;
 }
