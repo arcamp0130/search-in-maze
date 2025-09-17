@@ -78,12 +78,17 @@ hr {
 .maze.container {
   display: block;
   width: 100%;
-  max-width: 30rem;;
+  max-width: 30rem;
 }
 
 #maze {
+  display: grid;
   width: 100%;
-  height: 100%;
+  max-width: 30rem;
+  max-height: 30rem;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 0.25rem;
 }
 
 .terms.container {
