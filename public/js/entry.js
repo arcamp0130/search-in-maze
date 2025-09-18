@@ -11,8 +11,8 @@ const cellType = Object.freeze({
     searching: 'searching'
 });
 
-let targetIsSet = false;
-let startIsSet = false;
+let targetCell;
+let startCell;
 
 // Maze cells generator
 window.addEventListener("load", () => {
@@ -37,6 +37,20 @@ window.addEventListener("load", () => {
             const selected = e.target;
             const newValue = document.querySelector("input[name='cell-change']:checked").dataset.cellType;
             selected.dataset.cellType = newValue;
+            if (newValue === cellType.start) {
+                // Removing "start" attr if it was previously set
+                if (startCell != null) 
+                    startCell.dataset.cellType = cellType.free;
+                startCell = selected;
+            }
+
+            if (newValue === cellType.target) {
+                // Removing "target" attr if it was previously set
+                if (targetCell != null) 
+                    targetCell.dataset.cellType = cellType.free;
+                targetCell = selected;
+            }
+
         });
     });
 });
