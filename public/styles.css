@@ -15,27 +15,27 @@
   --input-cell-selected: hsl(0, 0%, 5%);
 }
 
-.cell.free {
+.cell[data-cell-type="free"] {
   background-color: var(--cell-free-color);
 }
 
-.cell.wall {
+.cell[data-cell-type="wall"] {
   background-color: var(--cell-wall-color);
 }
 
-.cell.start {
+.cell[data-cell-type="start"] {
   background-color: var(--cell-start-color);
 }
 
-.cell.target {
+.cell[data-cell-type="target"] {
   background-color: var(--cell-target-color);
 }
 
-.cell.trackback {
+.cell[data-cell-type="trackback"] {
   background-color: var(--cell-trackback-color);
 }
 
-.cell.searching {
+.cell[data-cell-type="searching"] {
   background-color: var(--cell-searching-color);
 }
 

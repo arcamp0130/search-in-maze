@@ -27,11 +27,10 @@
                     <div class="container">
                         <p>Select to change</p>
                         <div class="cells controller">
-                            <input type="radio" class="cell free" name="cell-change" id="free-cell-inp"
-                                checked></button>
-                            <input type="radio" class="cell wall" name="cell-change" id="add-wall-inp"></button>
-                            <input type="radio" class="cell start" name="cell-change" id="start-point-inp"></button>
-                            <input type="radio" class="cell target" name="cell-change" id="target-inp"></button>
+                            <input type="radio" class="cell" data-cell-type="free" name="cell-change" id="free-cell-inp" checked></button>
+                            <input type="radio" class="cell" data-cell-type="wall" name="cell-change" id="add-wall-inp"></button>
+                            <input type="radio" class="cell" data-cell-type="start" name="cell-change" id="start-point-inp"></button>
+                            <input type="radio" class="cell" data-cell-type="target" name="cell-change" id="target-inp"></button>
                         </div>
                     </div>
 
@@ -59,27 +58,27 @@
                     <p>Sybmology</p>
                     <ul>
                         <li>
-                            <span class="cell free"></span>
+                            <span class="cell" data-cell-type="free"></span>
                             <p>Free cell</p>
                         </li>
                         <li>
-                            <span class="cell start"></span>
+                            <span class="cell" data-cell-type="start"></span>
                             <p>Start point</p>
                         </li>
                         <li>
-                            <span class="cell wall"></span>
+                            <span class="cell" data-cell-type="wall"></span>
                             <p>Wall</p>
                         </li>
                         <li>
-                            <span class="cell target"></span>
+                            <span class="cell" data-cell-type="target"></span>
                             <p>Target</p>
                         </li>
                         <li>
-                            <span class="cell trackback"></span>
+                            <span class="cell" data-cell-type="trackback"></span>
                             <p>Found path</p>
                         </li>
                         <li>
-                            <span class="cell searching"></span>
+                            <span class="cell" data-cell-type="searching"></span>
                             <p>Searching path</p>
                         </li>
                     </ul>
