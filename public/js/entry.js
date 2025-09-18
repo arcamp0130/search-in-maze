@@ -16,7 +16,20 @@ let startCell;
 
 function modifySelectedCell(cell) {
     const newValue = document.querySelector("input[name='cell-change']:checked").dataset.cellType;
+
+    // TODO: Refactor verification of cells
+    if (cell.dataset.cellType === cellType.start) {
+        startCell.dataset.cellType = cellType.free;
+        startCell = null;
+    }
+
+    if (cell.dataset.cellType === cellType.target) {
+        targetCell.dataset.cellType = cellType.free;
+        targetCell = null
+    }
+
     cell.dataset.cellType = newValue;
+
     if (newValue === cellType.start) {
         // Removing "start" attr if it was previously set
         if (startCell != null)
