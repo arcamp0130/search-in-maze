@@ -14,8 +14,27 @@ const cellType = Object.freeze({
 let targetCell;
 let startCell;
 
+function modifySelectedCell(cell) {
+    const newValue = document.querySelector("input[name='cell-change']:checked").dataset.cellType;
+    cell.dataset.cellType = newValue;
+    if (newValue === cellType.start) {
+        // Removing "start" attr if it was previously set
+        if (startCell != null)
+            startCell.dataset.cellType = cellType.free;
+        startCell = cell;
+    }
+
+    if (newValue === cellType.target) {
+        // Removing "target" attr if it was previously set
+        if (targetCell != null)
+            targetCell.dataset.cellType = cellType.free;
+        targetCell = cell;
+    }
+
+}
+
 // Maze cells generator
-window.addEventListener("load", () => {
+function generateMaze() {
     const maze = document.querySelector("#maze");
     const cell = document.createElement("span");
     cell.classList.add("cell");
@@ -33,24 +52,8 @@ window.addEventListener("load", () => {
 
     // Appending event listener to each cell at maze
     document.querySelectorAll("#maze .cell").forEach(cell => {
-        cell.addEventListener("click", (e) => {
-            const selected = e.target;
-            const newValue = document.querySelector("input[name='cell-change']:checked").dataset.cellType;
-            selected.dataset.cellType = newValue;
-            if (newValue === cellType.start) {
-                // Removing "start" attr if it was previously set
-                if (startCell != null) 
-                    startCell.dataset.cellType = cellType.free;
-                startCell = selected;
-            }
-
-            if (newValue === cellType.target) {
-                // Removing "target" attr if it was previously set
-                if (targetCell != null) 
-                    targetCell.dataset.cellType = cellType.free;
-                targetCell = selected;
-            }
-
-        });
+        cell.addEventListener("click", (e) => modifySelectedCell(e.target));
     });
-});
+}
+
+window.addEventListener("load", () => generateMaze());
