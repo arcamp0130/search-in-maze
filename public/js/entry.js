@@ -1,5 +1,5 @@
-// TODO - Refactor generator with a proper implementation
-// Using this implemenation in order to get a proper preview of maze
+// TODO - create class-based managers in order to respond to Encapsulation
+// Use all these methods and attributes in a class named InputManager
 
 // Cell classes, types
 const cellType = Object.freeze({
@@ -10,6 +10,9 @@ const cellType = Object.freeze({
     trackback: 'trackback',
     searching: 'searching'
 });
+
+let targetIsSet = false;
+let startIsSet = false;
 
 // Maze cells generator
 window.addEventListener("load", () => {
@@ -27,4 +30,13 @@ window.addEventListener("load", () => {
             maze.appendChild(cell.cloneNode(true));
         }
     }
+
+    // Appending event listener to each cell at maze
+    document.querySelectorAll("#maze .cell").forEach(cell => {
+        cell.addEventListener("click", (e) => {
+            const selected = e.target;
+            const newValue = document.querySelector("input[name='cell-change']:checked").dataset.cellType;
+            selected.dataset.cellType = newValue;
+        });
+    });
 });
