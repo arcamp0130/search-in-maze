@@ -16,11 +16,11 @@ class InputManager {
     }
 
     init() {
-        this.generateMaze();
+        this.#generateMaze();
         this.#appendEventListeners();
     }
 
-    generateMaze() {
+    #generateMaze() {
         const cell = document.createElement("span");
         cell.classList.add("cell");
         cell.dataset.cellType = this.cellType.free;
@@ -38,13 +38,24 @@ class InputManager {
     }
 
     #appendEventListeners() {
-        document.querySelectorAll("#maze .cell").forEach(cell => {
-            cell.addEventListener("click", (e) => this.#modifySelectedCell(e.target));
-        });
-        this.resetBtn.addEventListener("click", () => this.generateMaze());
+        this.#appendListenerToMaze();
+        this.resetBtn.addEventListener("click", () => this.#resetMaze());
         
         // Adding asynchronous fucntions support in order to await for maze to be solved 
         this.solveBtn.addEventListener("click", async () => await this.#solveMaze());
+    }
+
+    #appendListenerToMaze() {
+        document.querySelectorAll("#maze .cell").forEach(cell => {
+            cell.addEventListener("click", (e) => this.#modifySelectedCell(e.target));
+        });
+    }
+    
+    // Maze is destroyed and regenerated, so appending
+    // again listeners is important page to work.
+    #resetMaze() {
+        this.generateMaze();
+        this.#appendListenerToMaze();
     }
 
     async #solveMaze() {
