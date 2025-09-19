@@ -54,7 +54,7 @@ class InputManager {
     // Maze is destroyed and regenerated, so appending
     // again listeners is important page to work.
     #resetMaze() {
-        this.generateMaze();
+        this.#generateMaze();
         this.#appendListenerToMaze();
     }
 
@@ -62,12 +62,12 @@ class InputManager {
         // TODO
         // Call function to solve algorithm with selected algorithm and maze as arguments.
         // Use 'Problem' function to define a new problem, state and several other implmementations.
-        const algorithm = document.querySelector("input[name='algorithm']:checked").dataset.algorithm;
+        const algorithm = document.querySelector("input[name='algorithm']:checked").value;
         
         // Disabling buttons 'start' and 'reset'
         this.solveBtn.disabled = true;
         this.resetBtn.disabled = true;
-        
+
         // Using this kind of implementation only to show that webpage is ready to await for response
         console.log(algorithm);
         await setTimeout(() => console.log("One second passed"), 1000);
