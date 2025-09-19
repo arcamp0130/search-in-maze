@@ -5,15 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital@0;1&display=swap" rel="stylesheet">
     <title>Solving a Maze</title>
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <h1>Maze solver</h1>
+    </header>
+
     <main>
-        <p>Hello from webpage!</p>
+        <div class="game container">
+            <div class="maze container">
+                <div id="maze"></div>
+            </div>
+
+            <div class="terms container">
+                <div class="controls section">
+                    <div class="container">
+                        <p>Select to change</p>
+                        <div class="cells controller">
+                            <input type="radio" class="cell" data-cell-type="free" name="cell-change" id="free-cell-inp" checked></button>
+                            <input type="radio" class="cell" data-cell-type="wall" name="cell-change" id="add-wall-inp"></button>
+                            <input type="radio" class="cell" data-cell-type="start" name="cell-change" id="start-point-inp"></button>
+                            <input type="radio" class="cell" data-cell-type="target" name="cell-change" id="target-inp"></button>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <p>Select an algorithm</p>
+                        <div class="algorithms controller">
+                            <div class="control">
+                                <input type="radio" name="algorithm" id="dfs" value="dfs" checked>
+                                <label for="dfs">DFS</label>
+                            </div>
+                            <div class="control">
+                                <input type="radio" name="algorithm" id="bfs" value="bfs">
+                                <label for="bfs">BFS</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="triggers container">
+                        <button class="trigger" type="button" id="solve-btn">Run algorithm</button>
+                        <button class="trigger" type="button" id="reset-btn">Reset maze</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="symbols section">
+                    <p>Sybmology</p>
+                    <ul>
+                        <li>
+                            <span class="cell" data-cell-type="free"></span>
+                            <p>Free cell</p>
+                        </li>
+                        <li>
+                            <span class="cell" data-cell-type="start"></span>
+                            <p>Start point</p>
+                        </li>
+                        <li>
+                            <span class="cell" data-cell-type="wall"></span>
+                            <p>Wall</p>
+                        </li>
+                        <li>
+                            <span class="cell" data-cell-type="target"></span>
+                            <p>Target</p>
+                        </li>
+                        <li>
+                            <span class="cell" data-cell-type="trackback"></span>
+                            <p>Found path</p>
+                        </li>
+                        <li>
+                            <span class="cell" data-cell-type="searching"></span>
+                            <p>Searching path</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert container">
+            <p id="message">Message or alert will be here</p>
+        </div>
     </main>
-    <footer></footer>
 </body>
 
 <script type="module" src="./js/entry.js"></script>
