@@ -11,6 +11,8 @@ class InputManager {
             searching: 'searching'
         });
         this.maze = document.querySelector("#maze");
+        this.resetBtn = document.querySelector("#reset-btn");
+        this.solveBtn = document.querySelector("#solve-btn");
     }
 
     init() {
@@ -39,6 +41,29 @@ class InputManager {
         document.querySelectorAll("#maze .cell").forEach(cell => {
             cell.addEventListener("click", (e) => this.#modifySelectedCell(e.target));
         });
+        this.resetBtn.addEventListener("click", () => this.generateMaze());
+        
+        // Adding asynchronous fucntions support in order to await for maze to be solved 
+        this.solveBtn.addEventListener("click", async () => await this.#solveMaze());
+    }
+
+    async #solveMaze() {
+        // TODO
+        // Call function to solve algorithm with selected algorithm and maze as arguments.
+        // Use 'Problem' function to define a new problem, state and several other implmementations.
+        const algorithm = document.querySelector("input[name='algorithm']:checked").dataset.algorithm;
+        
+        // Disabling buttons 'start' and 'reset'
+        this.solveBtn.disabled = true;
+        this.resetBtn.disabled = true;
+        
+        // Using this kind of implementation only to show that webpage is ready to await for response
+        console.log(algorithm);
+        await setTimeout(() => console.log("One second passed"), 1000);
+        
+        // Enabling buttons 'start' and 'reset' when getting an answer from algorithm
+        this.solveBtn.disabled = false;
+        this.resetBtn.disabled = false;
     }
 
     #modifySelectedCell(cell) {
