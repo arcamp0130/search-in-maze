@@ -40,7 +40,7 @@ class InputManager {
     #appendEventListeners() {
         this.#appendListenerToMaze();
         this.resetBtn.addEventListener("click", () => this.#resetMaze());
-        
+
         // Adding asynchronous fucntions support in order to await for maze to be solved 
         this.solveBtn.addEventListener("click", async () => await this.#solveMaze());
     }
@@ -50,7 +50,7 @@ class InputManager {
             cell.addEventListener("click", (e) => this.#modifySelectedCell(e.target));
         });
     }
-    
+
     // Maze is destroyed and regenerated, so appending
     // again listeners is important page to work.
     #resetMaze() {
@@ -62,7 +62,7 @@ class InputManager {
         // Get cells and initialize maze matrix filled with 'false'
         const cells = this.maze.querySelectorAll(".cell");
         const matrix = Array(10).fill(null).map(() => Array(10).fill(false));
-        
+
         cells.forEach(cell => {
             // Get cell coordinates
             const x = parseInt(cell.dataset.x);
@@ -71,7 +71,7 @@ class InputManager {
             // A cell is considered "free" if it isn't wall, target or source point
             matrix[y][x] = cell.dataset.cellType === this.cellType.free;
         });
-        
+
         return matrix;
     }
 
@@ -91,18 +91,36 @@ class InputManager {
                 y: this.targetCell.dataset.y
             }
         }
-        
+
         // Disabling buttons 'start' and 'reset'
         this.solveBtn.disabled = true;
         this.resetBtn.disabled = true;
 
-        // Using this kind of implementation only to show that webpage is ready to await for response
-        console.log(problem);
-        await setTimeout(() => console.log("One second passed"), 1000);
-        
+        console.log("Resolution of maze have started.");
+        const response = await this.#runAlgorithm(problem);
+        console.log(`Message: \"${response.message}\"`);
+
         // Enabling buttons 'start' and 'reset' when getting an answer from algorithm
         this.solveBtn.disabled = false;
         this.resetBtn.disabled = false;
+    }
+
+    // This is a pseudo-implementation of maze resolution by using
+    // selected algorithm. This function is used to simulate solving
+    // process and wait times.
+    async #runAlgorithm(problem) {
+        if (!problem) return null; // Early return if no problem is provided (initial call)
+
+        // Simulate algorithm processing time
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // For now, return a mock response
+        return {
+            success: true,
+            path: [], // This would contain the solution path
+            visitedCells: [], // This would contain cells visited during search
+            message: `Maze succesfully solved!. Check out resolution.`
+        };
     }
 
     #modifySelectedCell(cell) {
