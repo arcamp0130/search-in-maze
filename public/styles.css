@@ -13,6 +13,7 @@
   --alert-background-color: hsla(240, 100%, 10%, 20%);
   --radio-border: hsl(0, 0%, 40%);
   --input-cell-selected: hsl(0, 0%, 5%);
+  --button-disabled: hsl(0, 0%, 20%);
 }
 
 .cell[data-cell-type="free"] {
@@ -176,6 +177,11 @@ button.trigger:hover {
     cursor: pointer;
     background-color: var(--border-color);
     transition: 100ms ease;
+}
+
+button.trigger:disabled {
+    cursor: not-allowed;
+    background-color: var(--button-disabled);
 }
 
 .controls .cell:hover,
