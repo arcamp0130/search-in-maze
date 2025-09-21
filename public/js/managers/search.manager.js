@@ -54,17 +54,30 @@ class SearchManager {
             parent: null
         };
         queue.enqueue(startNode);
-        visited.add(startNode);
 
         try {
+            while(!queue.isEmpty()) {
+                const currentNode = queue.dequeue();
 
+                // if there isn't node to analyze
+                if (currentNode === null) continue;
+
+                // Using a string key for visited node Set
+                const nodeKey = `${currentNode.x},${currentNode.y}`;
+                // If node is alredy at visited list
+                if (visited.has(nodeKey)) continue;
+
+                // mark current node as visited
+                visited.add(nodeKey);
+
+            }
 
         } catch (e) {
             console.error(`Error while running BFS: ${e.message}`);
             return {
                 success: false,
                 path: [],
-                visitedCells: [],
+                visitedCells: Array.from(visited),
                 message: "Something went wrong during BFS execution."
             }
         }
@@ -93,10 +106,19 @@ class SearchManager {
             parent: null
         };
         stack.push(startNode);
-        visited.add(startNode);
 
         try {
+            while(!stack.isEmpty()) {
+                const currentNode = stack.pop();
 
+                if (currentNode === null) continue;
+
+                const nodeKey = `${currentNode.x},${currentNode.y}`;
+                if (visited.has(nodeKey)) continue;
+
+                visited.add(nodeKey);
+
+            }
 
         } catch (e) {
             console.error(`Error while running DFS: ${e.message}`);
