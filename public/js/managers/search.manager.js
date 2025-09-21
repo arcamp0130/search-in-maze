@@ -42,10 +42,18 @@ class SearchManager {
     async #bfs(problem) {
         console.log("Solving with BFS", problem);
 
-        /**
-         * Placeholder for BFS algorithm
-         * Please, use Queue as main data structure
-         */
+        const queue = new Queue();
+        const visited = new Set();
+        const path = [];
+
+        try {
+        } catch (e) {
+            console.error(`Error while running BFS: ${e.message}`);
+            return {
+                success: false,
+                message: "Something went wrong during BFS execution."
+            }
+        }
 
         // Mock behavior and response
         await this.#delay(2000);
@@ -55,16 +63,26 @@ class SearchManager {
             visitedCells: [],
             message: "BFS succesfully solved maze! Check out resolution."
         };
-    }
+    } // BFS ends
 
     // DFS implementation
     async #dfs(problem) {
         console.log("Solving with DFS", problem);
 
-        /**
-         * Placeholder for DFS algorithm
-         * Please, use Stack as main data structure
-         */
+        // stack for DFS, set to allow no-repeated values at visited cells
+        const stack = new Stack();
+        const visited = new Set();
+        const path = [];
+
+        try {
+            
+        } catch (e) {
+            console.error(`Error while running DFS: ${e.message}`);
+            return {
+                success: false,
+                message: "Something went wrong during DFS execution."
+            }
+        }
 
         // Mock behavior and response
         await this.#delay(2000);
@@ -74,7 +92,7 @@ class SearchManager {
             visitedCells: [],
             message: "DFS succesfully solved maze! Check out resolution."
         };
-    }
+    } // DFS ends
 }
 
 const searchManager = new SearchManager();
