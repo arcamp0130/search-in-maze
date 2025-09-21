@@ -33,4 +33,14 @@ export default class Stack {
     isEmpty() {
         return this.items.length === 0;
     }
+
+    // Clear all elements from the stack
+    clear() {
+        this.items = [];
+    }
+
+    // Parse stack to string representation for debugging
+    toString() {
+        return this.items.toString();
+    }
 }

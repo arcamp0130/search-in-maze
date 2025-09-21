@@ -34,4 +34,13 @@ export default class Queue {
         return this.items.length === 0;
     }
 
+    // Clear all elements from the queue
+    clear() {
+        this.items = [];
+    }
+
+    // Parse queue to string representation for debugging
+    toString() {
+        return this.items.toString();
+    }
 }
