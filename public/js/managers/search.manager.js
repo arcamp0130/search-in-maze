@@ -54,8 +54,6 @@ class SearchManager {
 
     // BFS implementation
     async #bfs(problem) {
-        console.log("Solving with BFS", problem);
-
         // queue for BFS, 'Set' to allow no-repeated values at visited cells
         const queue = new Queue();
         const visited = new Set();
@@ -84,7 +82,6 @@ class SearchManager {
 
                 // mark current node as visited
                 visited.add(nodeKey);
-                console.log(currentNode);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
                     path: path,
@@ -130,8 +127,6 @@ class SearchManager {
 
     // DFS implementation
     async #dfs(problem) {
-        console.log("Solving with DFS", problem);
-
         // stack for DFS, 'Set' to allow no-repeated values at visited cells
         const stack = new Stack();
         const visited = new Set();
@@ -154,7 +149,6 @@ class SearchManager {
                 if (visited.has(nodeKey)) continue;
 
                 visited.add(nodeKey);
-                console.log(`${problem.isGoal(currentNode)}`);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
                     path: path,
