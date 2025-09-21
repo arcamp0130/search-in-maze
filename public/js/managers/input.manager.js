@@ -10,14 +10,43 @@ class InputManager {
             trackback: 'trackback',
             searching: 'searching'
         });
+        this.alertStatus = Object.freeze({
+            none: "none",
+            success: "success",
+            fail: "fail",
+            warn: "warning"
+        });
+        this.defaultAlert = Object.freeze({
+            status: "none",
+            message: "Modify maze and press \"Run algorithm\" to start resolution."
+        });
         this.maze = document.querySelector("#maze");
         this.resetBtn = document.querySelector("#reset-btn");
         this.solveBtn = document.querySelector("#solve-btn");
+        this.message = {
+            container: document.querySelector(".alert.container"),
+            holder: document.querySelector("#message")
+        };
     }
 
     init() {
         this.#generateMaze();
         this.#appendEventListeners();
+        this.#updateAlert(this.defaultAlert);
+    }
+
+    #toggleInputs() {
+        this.resetBtn.disabled = !this.resetBtn.disabled;
+        this.solveBtn.disabled = !this.solveBtn.disabled;
+    }
+
+    #isValidMaze() {
+        return this.startCell != null && this.targetCell != null;
+    }
+
+    #updateAlert(alert) {
+        this.message.container.dataset.status = alert.status;
+        this.message.holder.innerHTML = alert.message;
     }
 
     #generateMaze() {
@@ -54,6 +83,9 @@ class InputManager {
     // Maze is destroyed and regenerated, so appending
     // again listeners is important page to work.
     #resetMaze() {
+        this.startCell = null;
+        this.targetCell = null;
+        this.#updateAlert(this.defaultAlert);
         this.#generateMaze();
         this.#appendListenerToMaze();
     }
@@ -61,6 +93,8 @@ class InputManager {
     #getMazeMatrix() {
         // Get cells and initialize maze matrix filled with 'false'
         const cells = this.maze.querySelectorAll(".cell");
+
+        // fill with null (x10) -> map array -> fill with false (x10) => 10*10 matrix
         const matrix = Array(10).fill(null).map(() => Array(10).fill(false));
 
         cells.forEach(cell => {
@@ -76,6 +110,19 @@ class InputManager {
     }
 
     async #solveMaze() {
+        this.#updateAlert({
+            status: this.alertStatus.none,
+            message: "Solving maze..."
+        });
+
+        if (!this.#isValidMaze()) {
+            this.#updateAlert({
+                status: this.alertStatus.warn,
+                message: "One or more elements in maze are missing. Try again."
+            });
+            return;
+        }
+
         // TODO
         // Call function to solve algorithm with selected algorithm and maze as arguments.
         // Use 'Problem' function to define a new problem, state and several other implmementations.
@@ -92,17 +139,16 @@ class InputManager {
             }
         }
 
-        // Disabling buttons 'start' and 'reset'
-        this.solveBtn.disabled = true;
-        this.resetBtn.disabled = true;
+        this.#toggleInputs(); // disable
 
-        console.log("Resolution of maze have started.");
         const response = await this.#runAlgorithm(problem);
-        console.log(`Message: \"${response.message}\"`);
+        const alert = {
+            status: response.success ? this.alertStatus.success : this.alertStatus.fail,
+            message: response.message
+        }
+        this.#updateAlert(alert);
 
-        // Enabling buttons 'start' and 'reset' when getting an answer from algorithm
-        this.solveBtn.disabled = false;
-        this.resetBtn.disabled = false;
+        this.#toggleInputs(); // enable
     }
 
     // This is a pseudo-implementation of maze resolution by using

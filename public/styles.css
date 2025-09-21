@@ -10,7 +10,10 @@
   --cell-trackback-color: hsl(120, 50%, 50%);
   --cell-searching-color: hsl(270, 50%, 50%);
   --cell-hover-border: hsl(300, 70%, 40%);
-  --alert-background-color: hsla(240, 100%, 10%, 20%);
+  --alert-default-color: hsla(240, 100%, 10%, 20%);
+  --alert-success-color: hsla(120, 100%, 30%, 20%);
+  --alert-warning-color: hsla(50, 100%, 30%, 20%);
+  --alert-error-color: hsla(0, 90%, 30%, 20%);
   --radio-border: hsl(0, 0%, 40%);
   --input-cell-selected: hsl(0, 0%, 5%);
   --button-disabled: hsl(0, 0%, 20%);
@@ -39,6 +42,23 @@
 .cell[data-cell-type="searching"] {
   background-color: var(--cell-searching-color);
 }
+
+.alert.container[data-status="none"] {
+    background-color: var(--alert-default-color);
+}
+
+.alert.container[data-status="success"] {
+    background-color: var(--alert-success-color);
+}
+
+.alert.container[data-status="warning"] {
+    background-color: var(--alert-warning-color);
+}
+
+.alert.container[data-status="fail"] {
+    background-color: var(--alert-error-color);
+}
+
 
 * {
   font-family: "Noto Sans", sans-serif;
@@ -97,7 +117,6 @@ hr {
   max-width: 768px;
   margin: 1.5rem auto;
   padding: 1.5rem 0;
-  background-color: var(--alert-background-color);
   border-radius: 1rem;
 }
 
