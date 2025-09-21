@@ -43,10 +43,10 @@ class SearchManager {
         const y = parseInt(node.y);
         // only 4 neighbors because only orthogonal movment is allowed
         const expanded = [
-            new Node({ x: x + 1, y: y }),   // Right
-            new Node({ x: x - 1, y: y }),   // Left
-            new Node({ x: x, y: y + 1 }),   // Down
-            new Node({ x: x, y: y - 1 })    // Up
+            new Node({ x: x + 1, y: y, parent: node }),   // Right
+            new Node({ x: x - 1, y: y, parent: node }),   // Left
+            new Node({ x: x, y: y + 1, parent: node }),   // Down
+            new Node({ x: x, y: y - 1, parent: node })    // Up
         ];
 
         return expanded;
@@ -68,9 +68,10 @@ class SearchManager {
             parent: null
         });
         queue.enqueue(startNode);
-
+        
         try {
             while (!queue.isEmpty()) {
+                await this.#delay()
                 const currentNode = queue.dequeue();
 
                 // if there isn't node to analyze
@@ -83,7 +84,7 @@ class SearchManager {
 
                 // mark current node as visited
                 visited.add(nodeKey);
-
+                console.log(currentNode);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
                     path: path,
@@ -93,7 +94,28 @@ class SearchManager {
 
                 // Getting neighbors of current node. Storing array
                 const neighbors = this.#expand(currentNode);
+
+                // Adding neighbors to queue
+                for (const neighbor of neighbors) {
+
+                    // Ommit if out of maze or it's a wall
+                    if (neighbor.x < 0 || neighbor.x >= 10 ||
+                        neighbor.y < 0 || neighbor.y >= 10 ||
+                        !problem.maze[neighbor.y][neighbor.x]) continue;
+
+                    // Ommit if is in queue or was visited
+                    if (visited.has(`${neighbor.x},${neighbor.y}`) ||
+                        queue.contains(neighbor)) continue;
+
+                    queue.enqueue(neighbor);
+                }
             } // while
+            return {
+                success: false,
+                path: path,
+                visitedCells: Array.from(visited),
+                message: "Unable to solve with BFS."
+            }
 
         } catch (e) {
             console.error(`Error while running BFS: ${e.message}`);
@@ -104,15 +126,6 @@ class SearchManager {
                 message: "Something went wrong during BFS execution."
             }
         }
-
-        // Mock behavior and response
-        await this.#delay(2000);
-        return {
-            success: true,
-            path: [],
-            visitedCells: Array.from(visited),
-            message: "BFS succesfully solved maze! Check out resolution."
-        };
     } // BFS ends
 
     // DFS implementation
@@ -132,6 +145,7 @@ class SearchManager {
 
         try {
             while (!stack.isEmpty()) {
+            await this.#delay();
                 const currentNode = stack.pop();
 
                 if (currentNode === null) continue;
@@ -140,7 +154,7 @@ class SearchManager {
                 if (visited.has(nodeKey)) continue;
 
                 visited.add(nodeKey);
-
+                console.log(`${problem.isGoal(currentNode)}`);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
                     path: path,
@@ -149,8 +163,23 @@ class SearchManager {
                 }
 
                 const neighbors = this.#expand(currentNode);
-            } // while
+                for (const neighbor of neighbors) {
+                    if (neighbor.x < 0 || neighbor.x >= 10 ||
+                        neighbor.y < 0 || neighbor.y >= 10 ||
+                        !problem.maze[neighbor.y][neighbor.x]) continue;
 
+                    if (visited.has(`${neighbor.x},${neighbor.y}`) ||
+                        stack.contains(neighbor)) continue;
+
+                    stack.push(neighbor);
+                }
+            } // while
+            return {
+                success: false,
+                path: path,
+                visitedCells: Array.from(visited),
+                message: "Unable to solve with DFS."
+            }
         } catch (e) {
             console.error(`Error while running DFS: ${e.message}`);
             return {
@@ -160,15 +189,6 @@ class SearchManager {
                 message: "Something went wrong during DFS execution."
             }
         }
-
-        // Mock behavior and response
-        await this.#delay(2000);
-        return {
-            success: true,
-            path: [],
-            visitedCells: [],
-            message: "DFS succesfully solved maze! Check out resolution."
-        };
     } // DFS ends
 }
 

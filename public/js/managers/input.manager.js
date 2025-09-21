@@ -142,6 +142,8 @@ class InputManager {
             }
         });
 
+        console.log(`source: ${problem.source.x},${problem.source.y}`);
+        console.log(`target: ${problem.target.x},${problem.target.y}`);
         this.#toggleInputs(); // disable
 
         const response = await searchManager.solve(problem);
