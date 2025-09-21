@@ -1,5 +1,5 @@
 import Problem from "../data-structures/problem.structure";
-import searchManager from "./search.manager";
+import { searchManager } from "./search.manager";
 
 class InputManager {
     constructor() {
@@ -144,7 +144,7 @@ class InputManager {
 
         this.#toggleInputs(); // disable
 
-        const response = await this.#runAlgorithm(problem);
+        const response = await searchManager.solve(problem);
         const alert = {
             status: response.success ? this.alertStatus.success : this.alertStatus.fail,
             message: response.message
@@ -152,24 +152,6 @@ class InputManager {
         this.#updateAlert(alert);
 
         this.#toggleInputs(); // enable
-    }
-
-    // This is a pseudo-implementation of maze resolution by using
-    // selected algorithm. This function is used to simulate solving
-    // process and wait times.
-    async #runAlgorithm(problem) {
-        if (!problem) return null; // Early return if no problem is provided (initial call)
-
-        // Simulate algorithm processing time
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // For now, return a mock response
-        return {
-            success: true,
-            path: [], // This would contain the solution path
-            visitedCells: [], // This would contain cells visited during search
-            message: `Maze succesfully solved! Check out resolution.`
-        };
     }
 
     #modifySelectedCell(cell) {
