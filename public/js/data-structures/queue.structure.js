@@ -7,12 +7,14 @@ export default class Queue {
     
     // Remove and return first element in array
     dequeue() {
-
+        return this.isEmpty()
+            ? null // null if empty
+            : this.items.shift();
     }
 
     // Add a new element as the last one in array
     enqueue(item) {
-
+        this.items.push(item);
     }
 
     // Return first element in array without removing it
