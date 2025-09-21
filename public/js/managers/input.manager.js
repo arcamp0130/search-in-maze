@@ -133,17 +133,14 @@ class InputManager {
             algorithm: document.querySelector("input[name='algorithm']:checked").value,
             maze: this.#getMazeMatrix(),
             source: {
-                x: this.startCell.dataset.x,
-                y: this.startCell.dataset.y
+                x: parseInt(this.startCell.dataset.x),
+                y: parseInt(this.startCell.dataset.y)
             },
             target: {
-                x: this.targetCell.dataset.x,
-                y: this.targetCell.dataset.y
+                x: parseInt(this.targetCell.dataset.x),
+                y: parseInt(this.targetCell.dataset.y)
             }
         });
-
-        console.log(`source: ${problem.source.x},${problem.source.y}`);
-        console.log(`target: ${problem.target.x},${problem.target.y}`);
         this.#toggleInputs(); // disable
 
         const response = await searchManager.solve(problem);
