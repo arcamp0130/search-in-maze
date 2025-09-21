@@ -42,15 +42,29 @@ class SearchManager {
     async #bfs(problem) {
         console.log("Solving with BFS", problem);
 
+        // queue for BFS, 'Set' to allow no-repeated values at visited cells
         const queue = new Queue();
         const visited = new Set();
         const path = [];
 
+        // Using start node with null parent to properly trackback path
+        const startNode = {
+            x: parseInt(problem.source.x),
+            y: parseInt(problem.source.y),
+            parent: null
+        };
+        queue.enqueue(startNode);
+        visited.add(startNode);
+
         try {
+
+
         } catch (e) {
             console.error(`Error while running BFS: ${e.message}`);
             return {
                 success: false,
+                path: [],
+                visitedCells: [],
                 message: "Something went wrong during BFS execution."
             }
         }
@@ -60,7 +74,7 @@ class SearchManager {
         return {
             success: true,
             path: [],
-            visitedCells: [],
+            visitedCells: Array.from(visited),
             message: "BFS succesfully solved maze! Check out resolution."
         };
     } // BFS ends
@@ -69,17 +83,27 @@ class SearchManager {
     async #dfs(problem) {
         console.log("Solving with DFS", problem);
 
-        // stack for DFS, set to allow no-repeated values at visited cells
+        // stack for DFS, 'Set' to allow no-repeated values at visited cells
         const stack = new Stack();
         const visited = new Set();
         const path = [];
+        const startNode = {
+            x: parseInt(problem.source.x),
+            y: parseInt(problem.source.y),
+            parent: null
+        };
+        stack.push(startNode);
+        visited.add(startNode);
 
         try {
-            
+
+
         } catch (e) {
             console.error(`Error while running DFS: ${e.message}`);
             return {
                 success: false,
+                path: [],
+                visitedCells: Array.from(visited),
                 message: "Something went wrong during DFS execution."
             }
         }
