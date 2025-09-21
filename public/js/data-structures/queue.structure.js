@@ -1,24 +1,33 @@
-class Queue {
+// FIFO
+// First In - First Out
+export default class Queue {
     constructor() {
         this.items = [];
     }
     
-    pop() {
+    // Remove and return first element in array
+    dequeue() {
 
     }
 
-    push(item) {
+    // Add a new element as the last one in array
+    enqueue(item) {
 
     }
 
+    // Return first element in array without removing it
     peek() {
 
     }
 
+    // Return array length
+    size() {
+
+    }
+
+    // Check if array is empty and return confirmation
     isEmpty() {
 
     }
 
 }
-
-export default Queue;
