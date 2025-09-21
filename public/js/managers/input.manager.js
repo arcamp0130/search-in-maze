@@ -105,8 +105,8 @@ class InputManager {
             const x = parseInt(cell.dataset.x);
             const y = parseInt(cell.dataset.y);
 
-            // A cell is considered "free" if it isn't wall, target or source point
-            matrix[y][x] = cell.dataset.cellType === this.cellType.free;
+            // A cell is false when it contains a wall, otherwhise is able to get explored
+            matrix[y][x] = cell.dataset.cellType !== this.cellType.wall;
         });
 
         return matrix;
