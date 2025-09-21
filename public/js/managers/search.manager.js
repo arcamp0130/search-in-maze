@@ -52,12 +52,23 @@ class SearchManager {
         return expanded;
     }
 
+    #trackback() {
+        let path = [];
+        /**
+         * Placeholder for tracback implementation.
+         * Use last visited node to start trackback
+         * and use parents for each node to generate
+         * an n-sized Array that must contain found path,
+         * ordered from source to target
+         */
+        return path;
+    }
+
     // BFS implementation
     async #bfs(problem) {
         // queue for BFS, 'Set' to allow no-repeated values at visited cells
         const queue = new Queue();
         const visited = new Set();
-        const path = [];
 
         // Using start node with null parent to properly trackback path
         const startNode = new Node({
@@ -84,7 +95,7 @@ class SearchManager {
                 visited.add(nodeKey);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
-                    path: path,
+                    path: this.#trackback(),
                     visitedCells: Array.from(visited),
                     message: "DFS succesfully solved maze! Check out resolution."
                 }
@@ -109,7 +120,7 @@ class SearchManager {
             } // while
             return {
                 success: false,
-                path: path,
+                path: [],
                 visitedCells: Array.from(visited),
                 message: "Unable to solve with BFS."
             }
@@ -130,7 +141,6 @@ class SearchManager {
         // stack for DFS, 'Set' to allow no-repeated values at visited cells
         const stack = new Stack();
         const visited = new Set();
-        const path = [];
         const startNode = new Node({
             x: parseInt(problem.source.x),
             y: parseInt(problem.source.y),
@@ -151,7 +161,7 @@ class SearchManager {
                 visited.add(nodeKey);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
-                    path: path,
+                    path: this.#trackback(),
                     visitedCells: Array.from(visited),
                     message: "DFS succesfully solved maze! Check out resolution."
                 }
@@ -170,7 +180,7 @@ class SearchManager {
             } // while
             return {
                 success: false,
-                path: path,
+                path: [],
                 visitedCells: Array.from(visited),
                 message: "Unable to solve with DFS."
             }
