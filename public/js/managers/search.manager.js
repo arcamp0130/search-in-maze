@@ -43,10 +43,10 @@ class SearchManager {
         const y = parseInt(node.y);
         // only 4 neighbors because only orthogonal movment is allowed
         const expanded = [
-            new Node(x + 1, y, node),   // Right
-            new Node(x - 1, y, node),   // Left
-            new Node(x, y + 1, node),   // Down
-            new Node(x, y - 1, node)    // Up
+            new Node({ x: x + 1, y: y }),   // Right
+            new Node({ x: x - 1, y: y }),   // Left
+            new Node({ x: x, y: y + 1 }),   // Down
+            new Node({ x: x, y: y - 1 })    // Up
         ];
 
         return expanded;
@@ -62,10 +62,11 @@ class SearchManager {
         const path = [];
 
         // Using start node with null parent to properly trackback path
-        const startNode = new Node(
-            parseInt(problem.source.x),
-            parseInt(problem.source.y),
-        );
+        const startNode = new Node({
+            x: parseInt(problem.source.x),
+            y: parseInt(problem.source.y),
+            parent: null
+        });
         queue.enqueue(startNode);
 
         try {
@@ -122,10 +123,11 @@ class SearchManager {
         const stack = new Stack();
         const visited = new Set();
         const path = [];
-        const startNode = new Node(
-            parseInt(problem.source.x),
-            parseInt(problem.source.y),
-        );
+        const startNode = new Node({
+            x: parseInt(problem.source.x),
+            y: parseInt(problem.source.y),
+            parent: null
+        });
         stack.push(startNode);
 
         try {

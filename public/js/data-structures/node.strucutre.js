@@ -1,7 +1,12 @@
 export default class Node {
-    constructor(x, y, parent) {
-        this.x = x;
-        this.y = y;
-        this.parent = parent || null;
+    constructor(node) {
+        this.x = node.x;
+        this.y = node.y;
+        this.parent = node.parent != null
+            ? {
+                x: node.parent.x,
+                y: node.parent.y
+            }
+            : null;
     }
 }
