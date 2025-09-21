@@ -43,10 +43,10 @@ class SearchManager {
         const y = parseInt(node.y);
         // only 4 neighbors because only orthogonal movment is allowed
         const expanded = [
-            {x: x + 1, y: y},   // Right
-            {x: x - 1, y: y},   // Left
-            {x: x, y: y + 1},   // Down
-            {x: x, y: y - 1},   // Up
+            new Node(x + 1, y, node),   // Right
+            new Node(x - 1, y, node),   // Left
+            new Node(x, y + 1, node),   // Down
+            new Node(x, y - 1, node)    // Up
         ];
 
         return expanded;
@@ -62,11 +62,10 @@ class SearchManager {
         const path = [];
 
         // Using start node with null parent to properly trackback path
-        const startNode = {
-            x: parseInt(problem.source.x),
-            y: parseInt(problem.source.y),
-            parent: null
-        };
+        const startNode = new Node(
+            parseInt(problem.source.x),
+            parseInt(problem.source.y),
+        );
         queue.enqueue(startNode);
 
         try {
@@ -90,6 +89,9 @@ class SearchManager {
                     visitedCells: Array.from(visited),
                     message: "DFS succesfully solved maze! Check out resolution."
                 }
+
+                // Getting neighbors of current node. Storing array
+                const neighbors = this.#expand(currentNode);
             } // while
 
         } catch (e) {
@@ -120,11 +122,10 @@ class SearchManager {
         const stack = new Stack();
         const visited = new Set();
         const path = [];
-        const startNode = {
-            x: parseInt(problem.source.x),
-            y: parseInt(problem.source.y),
-            parent: null
-        };
+        const startNode = new Node(
+            parseInt(problem.source.x),
+            parseInt(problem.source.y),
+        );
         stack.push(startNode);
 
         try {
@@ -144,6 +145,8 @@ class SearchManager {
                     visitedCells: Array.from(visited),
                     message: "DFS succesfully solved maze! Check out resolution."
                 }
+
+                const neighbors = this.#expand(currentNode);
             } // while
 
         } catch (e) {
