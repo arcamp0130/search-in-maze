@@ -70,15 +70,12 @@ class SearchManager {
                 // mark current node as visited
                 visited.add(nodeKey);
 
-                if (currentNode.x === problem.target.x &&
-                    currentNode.y === problem.target.y)
-                    return {
-                        success: true,
-                        path: path,
-                        visitedCells: Array.from(visited),
-                        message: "DFS succesfully solved maze! Check out resolution."
-
-                    }
+                if (problem.isGoal(currentNode)) return {
+                    success: true,
+                    path: path,
+                    visitedCells: Array.from(visited),
+                    message: "DFS succesfully solved maze! Check out resolution."
+                }
             } // while
 
         } catch (e) {
@@ -127,15 +124,12 @@ class SearchManager {
 
                 visited.add(nodeKey);
 
-                if (currentNode.x === problem.target.x &&
-                    currentNode.y === problem.target.y)
-                    return {
-                        success: true,
-                        path: path,
-                        visitedCells: Array.from(visited),
-                        message: "DFS succesfully solved maze! Check out resolution."
-
-                    }
+                if (problem.isGoal(currentNode)) return {
+                    success: true,
+                    path: path,
+                    visitedCells: Array.from(visited),
+                    message: "DFS succesfully solved maze! Check out resolution."
+                }
             } // while
 
         } catch (e) {
