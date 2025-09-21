@@ -1,3 +1,6 @@
+import Problem from "../data-structures/problem.structure";
+import searchManager from "./search.manager";
+
 class InputManager {
     constructor() {
         this.targetCell = null;
@@ -126,7 +129,7 @@ class InputManager {
         // TODO
         // Call function to solve algorithm with selected algorithm and maze as arguments.
         // Use 'Problem' class to define a new problem, state and several other implmementations.
-        const problem = {
+        const problem = new Problem({
             algorithm: document.querySelector("input[name='algorithm']:checked").value,
             maze: this.#getMazeMatrix(),
             source: {
@@ -137,7 +140,7 @@ class InputManager {
                 x: this.targetCell.dataset.x,
                 y: this.targetCell.dataset.y
             }
-        }
+        });
 
         this.#toggleInputs(); // disable
 
