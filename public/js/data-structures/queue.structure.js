@@ -17,17 +17,19 @@ export default class Queue {
 
     // Return first element in array without removing it
     peek() {
-
+        return this.isEmpty()
+            ? null // null if empty
+            : this.items[0];
     }
 
     // Return array length
     size() {
-
+        return this.items.length;
     }
 
     // Check if array is empty and return confirmation
     isEmpty() {
-
+        return this.items.length === 0;
     }
 
 }
