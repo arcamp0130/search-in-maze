@@ -81,7 +81,7 @@ class InputManager {
     }
 
     // Maze is destroyed and regenerated, so appending
-    // again listeners is important page to work.
+    // listeners again is important to allow page to work.
     #resetMaze() {
         this.startCell = null;
         this.targetCell = null;
@@ -125,15 +125,15 @@ class InputManager {
 
         // TODO
         // Call function to solve algorithm with selected algorithm and maze as arguments.
-        // Use 'Problem' function to define a new problem, state and several other implmementations.
+        // Use 'Problem' class to define a new problem, state and several other implmementations.
         const problem = {
             algorithm: document.querySelector("input[name='algorithm']:checked").value,
             maze: this.#getMazeMatrix(),
-            startCell: {
+            source: {
                 x: this.startCell.dataset.x,
                 y: this.startCell.dataset.y
             },
-            targetCell: {
+            target: {
                 x: this.targetCell.dataset.x,
                 y: this.targetCell.dataset.y
             }
@@ -165,7 +165,7 @@ class InputManager {
             success: true,
             path: [], // This would contain the solution path
             visitedCells: [], // This would contain cells visited during search
-            message: `Maze succesfully solved!. Check out resolution.`
+            message: `Maze succesfully solved! Check out resolution.`
         };
     }
 
