@@ -38,6 +38,20 @@ class SearchManager {
         }
     }
 
+    #expand(node) {
+        const x = parseInt(node.x);
+        const y = parseInt(node.y);
+        // only 4 neighbors because only orthogonal movment is allowed
+        const expanded = [
+            {x: x + 1, y: y},   // Right
+            {x: x - 1, y: y},   // Left
+            {x: x, y: y + 1},   // Down
+            {x: x, y: y - 1},   // Up
+        ];
+
+        return expanded;
+    }
+
     // BFS implementation
     async #bfs(problem) {
         console.log("Solving with BFS", problem);
