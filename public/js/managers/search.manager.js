@@ -56,7 +56,7 @@ class SearchManager {
         queue.enqueue(startNode);
 
         try {
-            while(!queue.isEmpty()) {
+            while (!queue.isEmpty()) {
                 const currentNode = queue.dequeue();
 
                 // if there isn't node to analyze
@@ -70,7 +70,16 @@ class SearchManager {
                 // mark current node as visited
                 visited.add(nodeKey);
 
-            }
+                if (currentNode.x === problem.target.x &&
+                    currentNode.y === problem.target.y)
+                    return {
+                        success: true,
+                        path: path,
+                        visitedCells: Array.from(visited),
+                        message: "DFS succesfully solved maze! Check out resolution."
+
+                    }
+            } // while
 
         } catch (e) {
             console.error(`Error while running BFS: ${e.message}`);
@@ -108,7 +117,7 @@ class SearchManager {
         stack.push(startNode);
 
         try {
-            while(!stack.isEmpty()) {
+            while (!stack.isEmpty()) {
                 const currentNode = stack.pop();
 
                 if (currentNode === null) continue;
@@ -118,7 +127,16 @@ class SearchManager {
 
                 visited.add(nodeKey);
 
-            }
+                if (currentNode.x === problem.target.x &&
+                    currentNode.y === problem.target.y)
+                    return {
+                        success: true,
+                        path: path,
+                        visitedCells: Array.from(visited),
+                        message: "DFS succesfully solved maze! Check out resolution."
+
+                    }
+            } // while
 
         } catch (e) {
             console.error(`Error while running DFS: ${e.message}`);
