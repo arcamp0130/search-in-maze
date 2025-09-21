@@ -1,7 +1,7 @@
 import Problem from "../data-structures/problem.structure";
 import Queue from "../data-structures/queue.structure";
 import Stack from "../data-structures/stack.structure";
-
+import Node from "../data-structures/node.strucutre";
 
 class SearchManager {
     constructor() {
