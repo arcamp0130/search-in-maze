@@ -118,6 +118,17 @@ class InputManager {
         target.dataset.cellType = type;
     }
 
+    #repaintSourceAndTarget() {
+        this.paintCell({
+            x: this.targetCell.dataset.x,
+            y: this.targetCell.dataset.y
+        }, this.cellType.target);
+        this.paintCell({
+            x: this.startCell.dataset.x,
+            y: this.startCell.dataset.y
+        }, this.cellType.start);
+    }
+
     async #solveMaze() {
         this.#updateAlert({
             status: this.alertStatus.none,
@@ -158,6 +169,7 @@ class InputManager {
         this.#updateAlert(alert);
         for (const item of response.path) 
             this.paintCell(item, this.cellType.backtrack);
+        this.#repaintSourceAndTarget();
         
         this.#toggleInputs(); // enable
     }
