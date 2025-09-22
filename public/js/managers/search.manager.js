@@ -52,7 +52,7 @@ class SearchManager {
         return expanded;
     }
 
-    #trackback(parentMatrix, firstParent) {
+    #backtrack(parentMatrix, firstParent) {
         let currentParent = firstParent;
         const path = [];
         while (currentParent !== null) {
@@ -69,7 +69,7 @@ class SearchManager {
         const queue = new Queue();
         const visited = new Set();
 
-        // Using start node with null parent to properly trackback path
+        // Using start node with null parent to properly backtrack path
         const startNode = new Node({
             x: parseInt(problem.source.x),
             y: parseInt(problem.source.y),
@@ -100,9 +100,9 @@ class SearchManager {
 
                 if (problem.isGoal(currentNode)) return {
                     success: true,
-                    path: this.#trackback(parentMatrix, currentNode.parent),
+                    path: this.#backtrack(parentMatrix, currentNode.parent),
                     visitedCells: Array.from(visited),
-                    message: "DFS succesfully solved maze! Check out resolution."
+                    message: "BFS succesfully solved maze! Check out resolution."
                 }
 
                 // Getting neighbors of current node. Storing array
@@ -168,7 +168,7 @@ class SearchManager {
                 visited.add(nodeKey);
                 if (problem.isGoal(currentNode)) return {
                     success: true,
-                    path: this.#trackback(parentMatrix, currentNode.parent),
+                    path: this.#backtrack(parentMatrix, currentNode.parent),
                     visitedCells: Array.from(visited),
                     message: "DFS succesfully solved maze! Check out resolution."
                 }

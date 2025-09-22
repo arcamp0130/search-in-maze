@@ -10,7 +10,7 @@ class InputManager {
             wall: 'wall',
             start: 'start',
             target: 'target',
-            trackback: 'trackback',
+            backtrack: 'backtrack',
             searching: 'searching'
         });
         this.alertStatus = Object.freeze({
