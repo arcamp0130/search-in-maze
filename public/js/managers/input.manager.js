@@ -112,6 +112,23 @@ class InputManager {
         return matrix;
     }
 
+    paintCell(cell, type) {
+        const target = this.maze.querySelector(
+            `span.cell[data-x="${cell.x}"][data-y="${cell.y}"]`);
+        target.dataset.cellType = type;
+    }
+
+    #repaintSourceAndTarget() {
+        this.paintCell({
+            x: this.targetCell.dataset.x,
+            y: this.targetCell.dataset.y
+        }, this.cellType.target);
+        this.paintCell({
+            x: this.startCell.dataset.x,
+            y: this.startCell.dataset.y
+        }, this.cellType.start);
+    }
+
     async #solveMaze() {
         this.#updateAlert({
             status: this.alertStatus.none,
@@ -148,8 +165,12 @@ class InputManager {
             status: response.success ? this.alertStatus.success : this.alertStatus.fail,
             message: response.message
         }
-        this.#updateAlert(alert);
 
+        this.#updateAlert(alert);
+        for (const item of response.path) 
+            this.paintCell(item, this.cellType.backtrack);
+        this.#repaintSourceAndTarget();
+        
         this.#toggleInputs(); // enable
     }
 
