@@ -76,8 +76,12 @@ class SearchManager {
             y: parseInt(problem.source.y),
             parent: null
         });
+
+        // Empty matrix of parents that will contain parent of each node
+        let parentMatrix = Array(10).fill(null).map(() => Array(10).fill(null))
+
         queue.enqueue(startNode);
-        
+
         try {
             while (!queue.isEmpty()) {
                 await this.#delay()
@@ -91,8 +95,10 @@ class SearchManager {
                 // If node is alredy at visited list
                 if (visited.has(nodeKey)) continue;
 
-                // mark current node as visited
+                // mark current node as visited and add its parent to matrix
                 visited.add(nodeKey);
+                parentMatrix[currentNode.y][currentNode.x] = currentNode.parent;
+
                 if (problem.isGoal(currentNode)) return {
                     success: true,
                     path: this.#trackback(),
@@ -146,11 +152,13 @@ class SearchManager {
             y: parseInt(problem.source.y),
             parent: null
         });
+        let parentMatrix = Array(10).fill(null).map(() => Array(10).fill(null))
+
         stack.push(startNode);
 
         try {
             while (!stack.isEmpty()) {
-            await this.#delay();
+                await this.#delay();
                 const currentNode = stack.pop();
 
                 if (currentNode === null) continue;
@@ -167,6 +175,8 @@ class SearchManager {
                 }
 
                 const neighbors = this.#expand(currentNode);
+                parentMatrix[currentNode.y][currentNode.x] = currentNode.parent;
+
                 for (const neighbor of neighbors) {
                     if (neighbor.x < 0 || neighbor.x >= 10 ||
                         neighbor.y < 0 || neighbor.y >= 10 ||
