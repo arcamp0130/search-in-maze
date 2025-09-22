@@ -1,3 +1,6 @@
+import Problem from "../data-structures/problem.structure";
+import { searchManager } from "./search.manager";
+
 class InputManager {
     constructor() {
         this.targetCell = null;
@@ -102,8 +105,8 @@ class InputManager {
             const x = parseInt(cell.dataset.x);
             const y = parseInt(cell.dataset.y);
 
-            // A cell is considered "free" if it isn't wall, target or source point
-            matrix[y][x] = cell.dataset.cellType === this.cellType.free;
+            // A cell is false when it contains a wall, otherwhise is able to get explored
+            matrix[y][x] = cell.dataset.cellType !== this.cellType.wall;
         });
 
         return matrix;
@@ -126,22 +129,21 @@ class InputManager {
         // TODO
         // Call function to solve algorithm with selected algorithm and maze as arguments.
         // Use 'Problem' class to define a new problem, state and several other implmementations.
-        const problem = {
+        const problem = new Problem({
             algorithm: document.querySelector("input[name='algorithm']:checked").value,
             maze: this.#getMazeMatrix(),
             source: {
-                x: this.startCell.dataset.x,
-                y: this.startCell.dataset.y
+                x: parseInt(this.startCell.dataset.x),
+                y: parseInt(this.startCell.dataset.y)
             },
             target: {
-                x: this.targetCell.dataset.x,
-                y: this.targetCell.dataset.y
+                x: parseInt(this.targetCell.dataset.x),
+                y: parseInt(this.targetCell.dataset.y)
             }
-        }
-
+        });
         this.#toggleInputs(); // disable
 
-        const response = await this.#runAlgorithm(problem);
+        const response = await searchManager.solve(problem);
         const alert = {
             status: response.success ? this.alertStatus.success : this.alertStatus.fail,
             message: response.message
@@ -149,24 +151,6 @@ class InputManager {
         this.#updateAlert(alert);
 
         this.#toggleInputs(); // enable
-    }
-
-    // This is a pseudo-implementation of maze resolution by using
-    // selected algorithm. This function is used to simulate solving
-    // process and wait times.
-    async #runAlgorithm(problem) {
-        if (!problem) return null; // Early return if no problem is provided (initial call)
-
-        // Simulate algorithm processing time
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // For now, return a mock response
-        return {
-            success: true,
-            path: [], // This would contain the solution path
-            visitedCells: [], // This would contain cells visited during search
-            message: `Maze succesfully solved! Check out resolution.`
-        };
     }
 
     #modifySelectedCell(cell) {
