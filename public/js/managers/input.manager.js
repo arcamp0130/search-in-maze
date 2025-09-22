@@ -112,7 +112,7 @@ class InputManager {
         return matrix;
     }
 
-    #paintCell(cell, type) {
+    paintCell(cell, type) {
         const target = this.maze.querySelector(
             `span.cell[data-x="${cell.x}"][data-y="${cell.y}"]`);
         target.dataset.cellType = type;
@@ -157,7 +157,7 @@ class InputManager {
 
         this.#updateAlert(alert);
         for (const item of response.path) 
-            this.#paintCell(item, this.cellType.backtrack);
+            this.paintCell(item, this.cellType.backtrack);
         
         this.#toggleInputs(); // enable
     }

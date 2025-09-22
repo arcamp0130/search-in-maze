@@ -2,6 +2,7 @@ import Problem from "../data-structures/problem.structure";
 import Queue from "../data-structures/queue.structure";
 import Stack from "../data-structures/stack.structure";
 import Node from "../data-structures/node.strucutre";
+import { inputManager } from "./input.manager";
 
 class SearchManager {
     constructor() {
@@ -63,6 +64,16 @@ class SearchManager {
         return path;
     }
 
+    #notifyVisited(node) {
+        inputManager.paintCell(
+            {
+                x: node.x,
+                y: node.y
+            },
+            inputManager.cellType.searching
+        );
+    }
+
     // BFS implementation
     async #bfs(problem) {
         // queue for BFS, 'Set' to allow no-repeated values at visited cells
@@ -97,6 +108,7 @@ class SearchManager {
                 // mark current node as visited and add its parent to matrix
                 visited.add(nodeKey);
                 parentMatrix[currentNode.y][currentNode.x] = currentNode.parent;
+                this.#notifyVisited(currentNode)
 
                 if (problem.isGoal(currentNode)) return {
                     success: true,
@@ -175,6 +187,7 @@ class SearchManager {
 
                 const neighbors = this.#expand(currentNode);
                 parentMatrix[currentNode.y][currentNode.x] = currentNode.parent;
+                this.#notifyVisited(currentNode);
 
                 for (const neighbor of neighbors) {
                     if (neighbor.x < 0 || neighbor.x >= 10 ||
